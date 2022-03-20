@@ -1,0 +1,33 @@
+﻿<Window x:Class="ИтоговоеЗадание.SoonServices"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ИтоговоеЗадание"
+        mc:Ignorable="d"
+        Title="SoonServices" Height="450" Width="800">
+    <Grid>
+        <ListView Name="LVServices">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="30">
+                        <TextBlock Text="{Binding Service.Title}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Client.FIO}"/>
+                            <TextBlock Text="{Binding Client.Email}"/>
+                            <TextBlock Text="{Binding Client.Phone}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Время начала: "/>
+                            <TextBlock Text="{Binding StartTime}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Время до начала: "/>
+                            <TextBlock Foreground="{Binding TimeColor}" Text="{Binding TimeUntilString}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
