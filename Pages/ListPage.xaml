@@ -1,0 +1,56 @@
+﻿<Page x:Class="ИтоговоеЗадание.Pages.ListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ИтоговоеЗадание.Pages"
+      xmlns:st="clr-namespace:ИтоговоеЗадание"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="150" Name="tbSearch" TextChanged="tbSearch_TextChanged"/>
+                <TextBlock Text="Сортировка по цене: "/>
+                <ComboBox x:Name="cmbSortPrice" SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem>Нет</ComboBoxItem>
+                    <ComboBoxItem>По возрастанию</ComboBoxItem>
+                    <ComboBoxItem>По убыванию</ComboBoxItem>
+                </ComboBox>
+
+                <Button Visibility="{Binding Source={x:Static st:DB.CheckAuth}}" Name="BtnSoonServices" Click="BtnSoonServices_Click" Content="Ближайшие записи"/>
+            </StackPanel>
+        </StackPanel>
+        <ListView Grid.Row="1" x:Name="listItems" Height="400" VerticalAlignment="Top">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Background="{Binding Color}">
+                        <Image Source="{Binding Image}" Width="64" Height="64" Stretch="Uniform"></Image>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Title}"/>
+                            <TextBlock>
+                                    <Run Text="{Binding Cost}" TextDecorations="{Binding Decoration, Mode=OneWay}"/>
+                                    <Run Text="{Binding NewCost, Mode=OneWay}"/>
+                                    <Run Text=" рублей за "/>
+                                    <Run Text="{Binding DurationInMins, Mode=OneWay}"/>
+                                    <Run Text=" минут"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding NewDiscount}"/>
+                            <StackPanel x:Name="pButtons" Orientation="Horizontal">
+                                <Button Visibility="{Binding Source={x:Static st:DB.CheckAuth}}" Click="Button_Click" Width="150" Content="Редактировать"/>
+                                <Button Visibility="{Binding Source={x:Static st:DB.CheckAuth}}" Width="150" Content="Удалить"/>
+                                <Button Visibility="{Binding Source={x:Static st:DB.CheckAuth}}" Name="BtnClientService" Click="BtnClientService_Click" Content="Запись клиента на услугу"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
